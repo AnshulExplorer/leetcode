@@ -2,20 +2,16 @@ class Solution {
 public:
     bool isValid(string s) {
         stack<char>st;
-        for(char c:s){
-            if(c=='(' || c=='{' || c=='['){
-                st.push(c);
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='(' || s[i]=='['||s[i]=='{'){
+                st.push(s[i]);
             }
-            else{
-                if(st.empty() || 
-                (c==')'&& st.top()!='(') ||
-                (c=='}'&& st.top()!='{')||
-                (c==']'&& st.top()!='[')){
-                    return false;
-                }
+            else if(st.empty())return false;
+            else if(st.top()=='(' && s[i]==')' || st.top()=='[' && s[i]==']' ||st.top()=='{' && s[i]=='}'){
                 st.pop();
             }
+            else return false;
         }
-      return st.empty();
+       return st.empty();
     }
 };
