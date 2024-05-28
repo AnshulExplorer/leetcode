@@ -2,12 +2,14 @@ class Solution {
 public:
     int singleNumber(vector<int>& nums) {
         int n=nums.size();
-        sort(nums.begin(),nums.end());
-        for(int i=1;i<n;i+=2){
-            if(nums[i]!=nums[i-1]){
-               return nums[i-1];
+        for(int i=0;i<n;i++){
+            int num=nums[i];
+            int cnt=0;
+            for(int j=0;j<n;j++){
+                if(num==nums[j])cnt++;
             }
-        }     
-        return nums[n-1];
+            if(cnt==1)return num;
+        }
+        return -1;
     }
 };
