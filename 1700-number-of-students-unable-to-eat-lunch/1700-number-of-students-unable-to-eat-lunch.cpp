@@ -1,31 +1,25 @@
 class Solution {
 public:
     int countStudents(vector<int>& students, vector<int>& sandwiches) {
-        int student_total=students.size(),cir=0,sq=0;
+        int n=students.size();
+        queue<int>q;
         for(int i=0;i<students.size();i++){
-            if(students[i]==0)cir++;
-            else sq++;
+            q.push(students[i]);
         }
-        for(int i=0;i<sandwiches.size();i++){
-            if(sandwiches[i]==0){
-                if(cir>0){
-                    cir--;
-                    student_total--;
-                }
-                else {
-                    return student_total;
-                }
+        int count=0;
+        int i=0; // trverse to the sandwiches
+        while(q.size()>0 && count!=q.size()){
+            if(q.front()==sandwiches[i]){
+                count=0; //VIMP
+                q.pop();
+                i++;
             }
-            else{
-               if(sq>0){
-                sq--;
-                student_total--;
-               } 
-               else{
-                return student_total;
-               }
+            else {
+                q.push(q.front());
+                q.pop();
+                count++;
             }
         }
-        return 0;
+        return q.size();
     }
 };
