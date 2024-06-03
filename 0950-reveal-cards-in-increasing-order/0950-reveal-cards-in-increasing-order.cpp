@@ -2,21 +2,20 @@ class Solution {
 public:
     vector<int> deckRevealedIncreasing(vector<int>& deck) {
         int n=deck.size();
-        vector<int>ans(n,0);
-        sort(deck.begin(),deck.end()); //2 3 5 7 11 13 17 
+        sort(deck.begin(),deck.end());
         queue<int>q;
-        //store indexes inn queue 
         for(int i=0;i<n;i++){
             q.push(i);
         }
-        //find order in which indexes are traversed 
-        //and fill sorted elements accordingly 
+        vector<int>ans(n);
         for(int i=0;i<n;i++){
-            ans[q.front()]=deck[i]; //store element at index traversed 
+            int idx=q.front();
             q.pop();
+            //popping front and pushing it to the back
             q.push(q.front());
             q.pop();
+            ans[idx]=deck[i];
         }
-        return ans;     
+        return ans;
     }
 };
