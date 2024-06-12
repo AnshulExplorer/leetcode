@@ -4,13 +4,13 @@ public:
         int n=nums.size();
         int noz=0;
         int noo=0;
-        int notwo=0;
+        int noTwo=0;
+        
         for(int i=0;i<n;i++){
             if(nums[i]==0)noz++;
             else if(nums[i]==1)noo++;
-            else notwo++;
+            else noTwo++;
         }
-        //print
         for(int i=0;i<n;i++){
             if(i<noz)nums[i]=0;
             else if(i<noz+noo)nums[i]=1;
