@@ -1,35 +1,30 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 class Solution {
 public:
-    TreeNode* build(vector<int>&pre,int prelo,int prehi,vector<int>&in,int inlo,int inhi){
-        if(prelo>prehi)return NULL;
-        TreeNode*root=new TreeNode(pre[prelo]);
-        if(prelo==prehi)return root;
-        int i=inlo;
-        while(i<=inhi){
-            if(in[i]==pre[prelo])break;
-            i++;
+    void insert(TreeNode* root,int val){
+        if(root==NULL)root=new TreeNode(val);
+        else if(root->val > val){   //left
+            if(root->left==NULL){
+                root->left=new TreeNode(val);  //insert
+            }
+            else {
+                insert(root->left,val);    //call
+            }
         }
-        int leftcount=i-inlo;
-        int rightcount=inhi-i;
-        root->left=build(pre,prelo+1,prelo+leftcount,in,inlo,i-1);
-        root->right=build(pre,prelo+leftcount+1,prehi,in,i+1,inhi);
-        return root;
+        else{            //right
+            if(root->right==NULL){
+                root->right=new TreeNode(val);
+            }
+            else{
+                insert(root->right,val);
+            }
+        }
     }
-    TreeNode* bstFromPreorder(vector<int>& pre) {
-        int n=pre.size();
-        vector<int>in=pre;  //copy 
-        sort(in.begin(),in.end());
-        return build(pre,0,n-1,in,0,n-1);   
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        int n=preorder.size();
+        TreeNode*root=new TreeNode(preorder[0]);
+        for(int i=1;i<n;i++){
+            insert(root,preorder[i]);
+        }
+        return root;
     }
 };
