@@ -1,16 +1,14 @@
 class Solution {
 public:
-    bool isPalindrome(int x) {
-        if(x<0)return false;
-        int org=x;
-        vector<int>ans;
-        while(x>0){
-            int ld=x%10;
-            ans.push_back(ld);
-            x/=10;
+    bool isPalindrome(int a) {
+        if(a<0)return false;
+        int org=a;
+        int b=0;
+        while(a>0){
+            int ld=a%10;
+            b = (b*10)+ld;
+            a/=10;
         }
-        vector<int>b=ans;
-        reverse(ans.begin(),ans.end());
-        return (ans==b);
+        return (org==b);
     }
 };
