@@ -4,11 +4,12 @@ public:
         int low=0;
         int high=numbers.size()-1;
         while(low<high){
-            if((numbers[low]+numbers[high])==target){
+            int sum=(numbers[low]+numbers[high]);
+            if(sum==target){
                 return {low+1,high+1};
             }
-            else if(numbers[low]>target)low++;
-            else if(numbers[high]>target)high--;
+            else if(sum<target)low++;
+            else high--;
         }
         return {-1};
     }
