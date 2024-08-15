@@ -4,7 +4,7 @@ public:
         int ten=0,five=0;
         int n=bills.size();
         if(bills[0]==10 || bills[0]==20)return false;
-        for(int i=1;i<n;i++){
+        for(int i=0;i<n;i++){
             if(bills[i]==5)five++;
             else if(bills[i]==10){
                 if(five>0){
