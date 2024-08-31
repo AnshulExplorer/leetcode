@@ -1,29 +1,40 @@
 class Solution {
 public:
+int value(char c){
+    switch(c){
+        case 'I':
+            return 1;
+            break;
+        case 'V':
+            return 5;
+            break;
+        case 'X':
+            return 10;
+            break;
+        case 'L':
+            return 50;
+            break;
+        case 'C':
+            return 100;
+            break;
+        case 'D':
+            return 500;
+            break;
+        case 'M':
+            return 1000;
+            break;
+    }
+    return 0;
+}
     int romanToInt(string s) {
-        int ans=0;
-        for(int i=0;i<s.size();i++){
-            if(s[i]=='I'){
-                ans+=1;
+        int size=s.size();
+        int ans=value(s[size-1]);
+        for(int i=size-2;i>=0;i--){
+            if(value(s[i]) < value(s[i+1])){
+                ans-=value(s[i]);
             }
-            else if(s[i]=='V'){
-               if(i>0 && s[i-1]=='I'){
-                   ans=-1;
-                   ans+=4;
-               }
-            }
-             else if(s[i]=='V'){
-                ans+=5;
-            }
-             else if (s[i]=='X' && s[i+1]=='C'){
-                ans+=90;
-            }
-            else if(s[i]=='M'){
-                ans+=1000;
-            }
-            else if(s[i]=='C'&& s[i+1]=='M'){
-                ans+=900;
-                i+=2;
+            else{
+                ans+=value(s[i]);
             }
         }
         return ans;
