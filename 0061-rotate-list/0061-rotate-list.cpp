@@ -1,25 +1,41 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
+    void reverse(vector<int>&ans,int left,int right){
+        while(left < right){
+            int temp=ans[left];
+            ans[left]=ans[right];
+            ans[right]=temp;
+            left++,right--;
+        }
+    }
     ListNode* rotateRight(ListNode* head, int k) {
-        if(head==NULL || head->next==NULL)return head;
-        ListNode* temp=head;
-        int n=0;
-        ListNode* tail=NULL;
-        while(temp!=NULL){   
-            if(temp->next==NULL)tail=temp;       
+        if(head==NULL || head->next==NULL || k<=0)return head;
+        ListNode*temp=head;
+        vector<int>ans;
+        while(temp){
+            ans.push_back(temp->val);
             temp=temp->next;
-            n++;
         }
-        k=k%n;
-        if(k==0)return head;
-        //place temp at (n-k)th position 
+        k=k%ans.size();
+        reverse(ans,0,ans.size()-1);
+        reverse(ans,0,k-1);
+        reverse(ans,k,ans.size()-1);
         temp=head;
-        for(int i=1;i<n-k;i++){
+        int idx=0;
+        while(temp){
+            temp->val=ans[idx++];
             temp=temp->next;
         }
-        tail->next=head;
-        head=temp->next;
-        temp->next=NULL;
         return head;
     }
 };
