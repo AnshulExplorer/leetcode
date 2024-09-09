@@ -1,38 +1,39 @@
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        vector< vector<int> >arr(n,vector<int>(n));
-        int minr=0;
-        int maxr=n-1;
-        int minc=0;
-        int maxc=n-1;
+        vector<vector<int>>ans(n,vector<int>(n));
+        int minr=0,maxr=n-1;
+        int minc=0,maxc=n-1;
         int count=1;
         while(minr<=maxr && minc<=maxc){
-            for(int j=minc;j<=maxc;j++){
-                arr[minr][j]=count++;         //right            
+            for(int i=minc;i<=maxc;i++){
+                ans[minr][i]=count;
+                count++;
             }
             minr++;
-            if(minr > maxr || minc > maxc)break;
+            if(minr>maxr || minc>maxc)break;
 
-            for(int i= minr;i<=maxc;i++){
-                arr[i][maxc]=count++;           //down
+            for(int i=minr;i<=maxr;i++){
+                ans[i][maxc]=count;
+                count++;
             }
             maxc--;
-            if(minr > maxr || minc > maxc)break;
+            if(minr>maxr || minc>maxc)break;
 
-            for(int j=maxc;j>=minc;j--){          //left
-                arr[maxr][j]=count++;
+            for(int i=maxc;i>=minc;i--){
+                ans[maxr][i]=count;
+                count++;
             }
             maxr--;
-            if(minr > maxr || minc > maxc)break;
+            if(minr>maxr || minc>maxc)break;
 
             for(int i=maxr;i>=minr;i--){
-                arr[i][minc]=count++;                //up
+                ans[i][minc]=count;
+                count++;
             }
             minc++;
-            if(minr > maxr || minc > maxc)break;
-
+            if(minr>maxr || minc>maxc)break;
         }
-         return arr;
+        return ans;
     }
 };
