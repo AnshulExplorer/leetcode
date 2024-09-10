@@ -1,21 +1,27 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        int n=nums.size();
-        int noz=0;
-        int noo=0;
-        int noTwo=0;
-        
-        for(int i=0;i<n;i++){
-            if(nums[i]==0)noz++;
-            else if(nums[i]==1)noo++;
-            else noTwo++;
-        }
-        for(int i=0;i<n;i++){
-            if(i<noz)nums[i]=0;
-            else if(i<noz+noo)nums[i]=1;
-            else nums[i]=2;
-        }
+       int low=0;
+       int mid=0;
+       int high=nums.size()-1;
+       //1) mid ke baare maoi sochna hai 
+       //2) 0 to low -1 , high+1 to end->2
+       while(mid<=high){
+           if(nums[mid]==2){
+               int temp=nums[mid];
+               nums[mid]=nums[high];
+               nums[high]=temp;
+               high--;
+           }
+           else if(nums[mid]==0){
+               int temp=nums[mid];
+               nums[mid]=nums[low];
+               nums[low]=temp;
+               low++;
+               mid++;
+           }
+           else mid++;
+       }
         return ;
     }
 };
