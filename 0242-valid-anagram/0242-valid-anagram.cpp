@@ -1,24 +1,24 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        if(s.length()!=t.length())return false;
-        unordered_map<char,int>map1; //for s
-        unordered_map<char,int>map2;  //for t
-        for(int i=0;i<s.length();i++){
-            map1[s[i]]++;
+        if(s.size()!=t.size())return false;
+        unordered_map<char,int>mp1;
+        unordered_map<char,int>mp2;
+        bool flag=false;
+        for(int i=0;i<s.size();i++){
+            mp1[s[i]]++;
+            mp2[t[i]]++;
         }
-        for(int i=0;i<t.length();i++){
-            map2[t[i]]++;
-        }
-        for(auto x: map1){
-            char ch1=x.first;
-            int freq1=x.second;
-            if(map2.find(ch1)!=map2.end()){
-                int freq2=map2[ch1];
-                if(freq1!=freq2)return false;
+        for(auto x:mp1){
+            if(mp2.find(x.first)!=mp2.end() && x.second==mp2[x.first]){
+                flag=true;
             }
-            else return false;
+            else {
+                flag=false;
+                break;
+            }
         }
-        return true;
+        return flag;
+
     }
 };
