@@ -7,10 +7,8 @@ public:
         while(i<j){
             while(i<j && s[i]=='0')i++;
             while(i<j && s[j]=='1')j--;
-            if(i<j){
-                ans+=(j-i);
-                i++,j--;
-            }
+            ans+=(j-i);
+            i++,j--;
         }
         return ans;
     }
