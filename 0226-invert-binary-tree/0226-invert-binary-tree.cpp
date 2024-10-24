@@ -11,16 +11,17 @@
  */
 class Solution {
 public:
-    void helper(TreeNode*root){
-        if(root==NULL)return ;
-        TreeNode* temp=root->left;
-        root->left=root->right;
-        root->right=temp;
-        helper(root->left);
-        helper(root->right);
-    }
     TreeNode* invertTree(TreeNode* root) {
-        helper(root);
+        if(root==nullptr)return nullptr;
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty()){
+            TreeNode*top=q.front();
+            q.pop();
+            swap(top->left,top->right);
+            if(top->left!=NULL)q.push(top->left);
+            if(top->right!=NULL)q.push(top->right);
+        }
         return root;
     }
 };
