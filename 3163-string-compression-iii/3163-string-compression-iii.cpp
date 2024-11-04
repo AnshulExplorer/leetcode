@@ -13,8 +13,10 @@ public:
                 }
             }
             else{
-                ans+=to_string(count);
-                ans+=word[i-1];
+                if(count>0){
+                    ans+=to_string(count);
+                    ans+=word[i-1];
+                }
                 count=1;
             }
         }
