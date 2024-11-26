@@ -18,7 +18,7 @@ void help(unordered_map<string,int>&mp,string &s,int k){
         help(mp,s,k);
         help(mp2,t,k);
         for(auto x:mp){
-            if(mp2.find(x.first)==mp2.end())return false;
+            if(mp2.find(x.first)==mp2.end() || mp2[x.first]!=x.second)return false;
         }
         return true;
     }
