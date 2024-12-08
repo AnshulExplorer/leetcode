@@ -1,30 +1,35 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* a, ListNode* b) {
-        ListNode* tempA=a;
-        ListNode* tempB=b;
-        ListNode* c=new ListNode(100);
-        ListNode* tempC=c;   //traversal
-        while(tempA!=NULL && tempB!=NULL){
-            if(tempA->val<=tempB->val){
-               ListNode* t=new ListNode(tempA->val);
-               tempC->next=t;
-               tempC=t;
-               tempA=tempA->next;
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode*dummy=new ListNode(7);
+        ListNode*temp=dummy;
+        ListNode*a=list1;
+        ListNode*b=list2;
+        while(a!=NULL && b!=NULL){
+            if(a->val <= b->val){
+                temp->next=a;
+                temp=temp->next;
+                a=a->next; 
             }
             else{
-                ListNode* t=new ListNode(tempB->val);
-                tempC->next=t;
-                tempC=t;  
-                tempB=tempB->next;             
+                temp->next=b;
+                temp=temp->next;
+                b=b->next;
             }
         }
-        if(tempA==NULL){
-            tempC->next=tempB;
-        }
-        else{
-            tempC->next=tempA;
-        }
-        return c->next;
+        if(b!=NULL)temp->next=b;
+        else temp->next=a;
+        return dummy->next;
+
     }
 };
