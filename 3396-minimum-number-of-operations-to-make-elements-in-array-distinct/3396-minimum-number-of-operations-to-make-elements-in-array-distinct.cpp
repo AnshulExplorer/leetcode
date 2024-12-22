@@ -11,7 +11,7 @@ public:
             for(auto x:mp){
                 if(x.second>1){
                     flag=true;
-                    for(int i=0;i<3 && idx<n;i++){
+                    for(int i=0;i<3;i++){
                         if(mp.find(nums[idx])!=mp.end()){
                             mp[nums[idx]]--;
                             if(nums[idx]==0)mp.erase(nums[idx]);
