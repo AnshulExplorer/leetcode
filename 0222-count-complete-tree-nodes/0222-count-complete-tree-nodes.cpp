@@ -13,16 +13,8 @@ class Solution {
 public:
     int countNodes(TreeNode* root) {
         if(root==NULL)return 0;
-        queue<TreeNode*>q;
-        int ans=0;
-        q.push(root);
-        while(!q.empty()){
-            TreeNode*top=q.front();
-            q.pop();
-            ans++;
-            if(top->left!=NULL)q.push(top->left);
-            if(top->right!=NULL)q.push(top->right);
-        }
-        return ans;
+        int a=countNodes(root->left);
+        int b=countNodes(root->right);
+        return a+b+1;
     }
 };
