@@ -1,14 +1,17 @@
 class Solution {
 public:
     int minimumLength(string s) {
-        int n=s.size(),ans=0;
         map<char,int>mp;
-        for(auto x:s)mp[x]++;
+        for(auto x:s){
+            mp[x]++;
+        }
+        int ans=0;
         for(auto x:mp){
-            if(x.second%2==0){
-                ans+=2;
+            int curr=x.second;
+            while(curr>=3){
+                curr=(curr%3)+(curr/3);
             }
-            else ans++;
+            ans+=curr;
         }
         return ans;
     }
